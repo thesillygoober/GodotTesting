@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkwaqv16ht0w3"]
+[gd_scene load_steps=9 format=3 uid="uid://dkwaqv16ht0w3"]
 
 [ext_resource type="Script" path="res://FightingGameCollisionBoxTest/square.gd" id="1_hma0b"]
 [ext_resource type="Script" path="res://FightingGameCollisionBoxTest/fighting_game_collision_box_test.gd" id="1_lx0dt"]
 [ext_resource type="Script" path="res://FightingGameCollisionBoxTest/square2.gd" id="2_2sfub"]
+[ext_resource type="Script" path="res://back_to_menu.gd" id="4_fbio4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2bd1"]
 size = Vector2(106, 107)
@@ -144,6 +145,13 @@ offset_right = -16.0
 offset_bottom = 204.0
 grow_horizontal = 2
 text = "Blue Speed"
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "go back"
+script = ExtResource("4_fbio4")
 
 [connection signal="drag_ended" from="CanvasLayer/Control/HSlider" to="Square1" method="_on_h_slider_drag_ended"]
 [connection signal="drag_ended" from="CanvasLayer/Control/HSlider2" to="Square2" method="_on_h_slider_2_drag_ended"]
