@@ -1,0 +1,149 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkwaqv16ht0w3"]
+
+[ext_resource type="Script" path="res://FightingGameCollisionBoxTest/square.gd" id="1_hma0b"]
+[ext_resource type="Script" path="res://FightingGameCollisionBoxTest/fighting_game_collision_box_test.gd" id="1_lx0dt"]
+[ext_resource type="Script" path="res://FightingGameCollisionBoxTest/square2.gd" id="2_2sfub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2bd1"]
+size = Vector2(106, 107)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_prtak"]
+radius = 11.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wej1e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j74lb"]
+size = Vector2(1161, 10)
+
+[node name="FightingGameCollisionBoxTest" type="Node2D" node_paths=PackedStringArray("square1", "square2")]
+script = ExtResource("1_lx0dt")
+square1 = NodePath("Square1")
+square2 = NodePath("Square2")
+
+[node name="Square1" type="CharacterBody2D" parent="."]
+position = Vector2(515, 343)
+script = ExtResource("1_hma0b")
+
+[node name="Line2D" type="Line2D" parent="Square1"]
+points = PackedVector2Array(0, 107, 0, 0)
+width = 107.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="Square1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Square1/Area2D"]
+position = Vector2(0, 54)
+shape = SubResource("RectangleShape2D_d2bd1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Square1"]
+position = Vector2(-42, 96)
+shape = SubResource("CircleShape2D_prtak")
+
+[node name="Square2" type="CharacterBody2D" parent="."]
+position = Vector2(649, 343)
+script = ExtResource("2_2sfub")
+
+[node name="Line2D" type="Line2D" parent="Square2"]
+points = PackedVector2Array(0, 107, 0, 0)
+width = 107.0
+default_color = Color(0, 1, 1, 1)
+
+[node name="Area2D" type="Area2D" parent="Square2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Square2/Area2D"]
+position = Vector2(0, 53.5)
+shape = SubResource("RectangleShape2D_d2bd1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Square2"]
+position = Vector2(43, 97)
+shape = SubResource("CircleShape2D_wej1e")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 638)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(580.5, 0)
+shape = SubResource("RectangleShape2D_j74lb")
+
+[node name="Line2D" type="Line2D" parent="StaticBody2D"]
+points = PackedVector2Array(0, 0, 1162, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -306.0
+offset_top = 32.0
+offset_right = 306.0
+offset_bottom = 119.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "A, W, D for Red
+Left Arrow, Up Arrow, Right arrow for Blue"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 4.0
+offset_top = 143.0
+offset_right = 128.0
+offset_bottom = 159.0
+grow_horizontal = 2
+min_value = 100.0
+max_value = 1000.0
+value = 100.0
+
+[node name="HSlider2" type="HSlider" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 4.0
+offset_top = 186.0
+offset_right = 128.0
+offset_bottom = 202.0
+grow_horizontal = 2
+min_value = 100.0
+max_value = 1000.0
+value = 100.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.0
+offset_top = 139.0
+offset_right = -16.0
+offset_bottom = 162.0
+grow_horizontal = 2
+text = "Red Speed"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.0
+offset_top = 181.0
+offset_right = -16.0
+offset_bottom = 204.0
+grow_horizontal = 2
+text = "Blue Speed"
+
+[connection signal="drag_ended" from="CanvasLayer/Control/HSlider" to="Square1" method="_on_h_slider_drag_ended"]
+[connection signal="drag_ended" from="CanvasLayer/Control/HSlider2" to="Square2" method="_on_h_slider_2_drag_ended"]
