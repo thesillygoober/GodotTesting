@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch6ymehg8qsnk"]
+[gd_scene load_steps=4 format=3 uid="uid://ch6ymehg8qsnk"]
 
 [ext_resource type="Script" path="res://NetworkTest/network_test.gd" id="1_3u8km"]
+[ext_resource type="Script" path="res://NetworkTest/client_test_node.gd" id="2_yh0yo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thdok"]
 content_margin_left = 50.0
@@ -67,5 +68,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "IP"
 
+[node name="ClientTestNode" type="Node2D" parent="."]
+script = ExtResource("2_yh0yo")
+
 [connection signal="pressed" from="CanvasLayer/Control/PanelContainer/VBoxContainer/CreateServer" to="." method="_on_create_server_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/PanelContainer/VBoxContainer/HBoxContainer/JoinServer" to="." method="_on_join_server_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/PanelContainer/VBoxContainer/HBoxContainer/JoinServer" to="ClientTestNode" method="_on_join_server_pressed"]
