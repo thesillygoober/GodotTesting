@@ -1,10 +1,8 @@
 extends Node2D
 
+var peer: ENetMultiplayerPeer
 var has_created_server: bool = false
-var server: ENetMultiplayerPeer
-
 var has_created_client: bool = false
-var client: ENetMultiplayerPeer
 
 func _ready():
 
@@ -35,9 +33,9 @@ func _on_create_server_pressed():
 
         has_created_server = true
 
-        server = ENetMultiplayerPeer.new()
-        server.create_server(1336, 8)
-        multiplayer.multiplayer_peer = server
+        peer = ENetMultiplayerPeer.new()
+        peer.create_server(1336, 8)
+        multiplayer.multiplayer_peer = peer
 
         print("Server ID: " + str(multiplayer.get_unique_id()))
         print("Is Server: " + str(multiplayer.is_server()))
@@ -50,6 +48,6 @@ func _on_join_server_pressed():
 
         var desired_address_target: String = $CanvasLayer/Control/PanelContainer/VBoxContainer/HBoxContainer/IPAddress.text
 
-        client = ENetMultiplayerPeer.new()
-        client.create_client(desired_address_target, 1336)
-        multiplayer.multiplayer_peer = client
+        peer = ENetMultiplayerPeer.new()
+        peer.create_client(desired_address_target, 1336)
+        multiplayer.multiplayer_peer = peer
