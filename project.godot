@@ -10,14 +10,25 @@ config_version=5
 
 [application]
 
-config/name="Testing"
+config/name="GodotTesting"
 run/main_scene="res://MainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://testing.png"
 
 [display]
 
+window/size/resizable=false
 window/stretch/mode="canvas_items"
+
+[file_customization]
+
+folder_colors={
+"res://AnimationPlayerTest/": "green",
+"res://AnimatronicMovement/": "green",
+"res://FightingGameCollisionBoxTest/": "green",
+"res://MainMenu/": "yellow",
+"res://NetworkTest/": "green"
+}
 
 [input]
 
