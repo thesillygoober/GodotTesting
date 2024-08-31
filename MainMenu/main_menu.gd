@@ -17,3 +17,7 @@ func _on_animation_player_test_pressed():
 func _on_fighting_game_collision_box_test_pressed():
 	
 	get_tree().change_scene_to_file("res://FightingGameCollisionBoxTest/fighting_game_collision_box_test.tscn")
+
+func _on_network_test_pressed():
+
+	get_tree().change_scene_to_file("res://NetworkTest/network_test.tscn")

@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var status_color: ColorRect
+
 var peer: ENetMultiplayerPeer
 var has_created_server: bool = false
 var has_created_client: bool = false
@@ -40,6 +42,8 @@ func _on_create_server_pressed():
         print("Server ID: " + str(multiplayer.get_unique_id()))
         print("Is Server: " + str(multiplayer.is_server()))
 
+        create_tween().set_trans(Tween.TRANS_QUAD).tween_property($CanvasLayer/Control/PanelContainer, "position:y", 2000, 1)
+
 func _on_join_server_pressed():
 	
     if not has_created_client and not has_created_server:
@@ -51,3 +55,15 @@ func _on_join_server_pressed():
         peer = ENetMultiplayerPeer.new()
         peer.create_client(desired_address_target, 1336)
         multiplayer.multiplayer_peer = peer
+
+        create_tween().set_trans(Tween.TRANS_QUAD).tween_property($CanvasLayer/Control/PanelContainer, "position:y", 2000, 1)
+
+func _on_button_pressed():
+	
+    _random_rpc_func.rpc()
+
+@rpc("any_peer","call_remote","unreliable",0)
+func _random_rpc_func():
+
+    print("hello my name is " + str(multiplayer.get_unique_id()))
+    $CanvasLayer/Control/ColorRect.color = Color.LIGHT_SEA_GREEN

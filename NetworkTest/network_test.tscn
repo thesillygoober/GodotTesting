@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch6ymehg8qsnk"]
+[gd_scene load_steps=4 format=3 uid="uid://ch6ymehg8qsnk"]
 
 [ext_resource type="Script" path="res://NetworkTest/network_test.gd" id="1_3u8km"]
+[ext_resource type="Script" path="res://back_to_menu.gd" id="2_0cqr5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thdok"]
 content_margin_left = 50.0
@@ -18,8 +19,9 @@ corner_radius_bottom_left = 3
 shadow_color = Color(0, 0, 0, 0.305882)
 shadow_size = 20
 
-[node name="NetworkTest" type="Node2D"]
+[node name="NetworkTest" type="Node2D" node_paths=PackedStringArray("status_color")]
 script = ExtResource("1_3u8km")
+status_color = NodePath("CanvasLayer/Control/ColorRect")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -30,6 +32,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -30.0
+offset_right = 90.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 181.0
+offset_right = 433.0
+offset_bottom = 221.0
+color = Color(1, 0, 0, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -68,5 +92,26 @@ size_flags_horizontal = 3
 text = "127.0.0.1"
 placeholder_text = "IP"
 
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -390.0
+offset_right = 390.0
+offset_bottom = 75.0
+grow_horizontal = 2
+text = "ATTENTION: This scene requires two instances of GodotTesting to be open. Go to Debug > Customize Run Instances and then check the checkbox on the top left and change the amount of instances from 1 to 2 and relaunch. The windows might be stacked on top of each other, so drag one off."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+offset_right = 8.0
+offset_bottom = 8.0
+text = "go back"
+script = ExtResource("2_0cqr5")
+
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/PanelContainer/VBoxContainer/CreateServer" to="." method="_on_create_server_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/PanelContainer/VBoxContainer/HBoxContainer/JoinServer" to="." method="_on_join_server_pressed"]
